@@ -20,16 +20,15 @@ from selenium.common.exceptions import WebDriverException
 # path to chrome.exe
 pth_chrome = r""
 
-webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(pth_chrome))
-chrome = webbrowser.get('chrome')
+webbrowser.register("chrome", None, webbrowser.BackgroundBrowser(pth_chrome))
+chrome = webbrowser.get("chrome")
 
 
-# variables for notifications using Telegram and Discord
+# variables for notifications using Telegram
 
 bot_token = "" # Bot token for Telegram
 chat_id = ""  # chat id for the telegram channel the notifications get send to 
 url = "https://api.telegram.org/bot%s/sendMessage?chat_id=%s" % (bot_token, chat_id)
-webhook_url = "" # webhook for discord
 
 
 # options for chrome browser, in this case headless without an gui
@@ -157,7 +156,7 @@ try:
                 if gpu_not_availabe_amazon not in gpu_check:
                     if price_not_found and ("MSI Gaming Trio 5090 (Amazon)" not in gpu_name and "ASUS Astral 5090 (Amazon)" not in gpu_name):
                         print(f"[{get_current_time()}] {gpu_name}"+ Fore.GREEN + " in stock"+ Style.RESET_ALL + " at Amazon")
-                        requests.post(url, json={'text': gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
+                        requests.post(url, json={"text": gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
                         if current_time - time_amazon >= 360:
                             time_amazon = time.time()
                             requests.post(url, json={'text':"#"}, timeout=10)
@@ -165,7 +164,7 @@ try:
                             
                     elif price < 4000:
                         print(f"[{get_current_time()}] {gpu_name}"+ Fore.GREEN + " in stock"+ Style.RESET_ALL + " at Amazon")
-                        requests.post(url, json={'text': gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
+                        requests.post(url, json={"text": gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
                         if current_time - time_amazon >= 360:
                             time_amazon = time.time()
                             requests.post(url, json={'text':"#"}, timeout=10)
@@ -180,7 +179,7 @@ try:
             elif "Alternate" in gpu_name:
                 if gpu_available_alternate in gpu_check or gpu_available_alternate_2 in gpu_check or gpu_available_alternate_3 in gpu_check:
                     print(f"[{get_current_time()}] {gpu_name}"+ Fore.GREEN + " in stock"+ Style.RESET_ALL + " at Alternate")
-                    requests.post(url, json={'text': gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
+                    requests.post(url, json={"text": gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
                     cookies_accepted = False
                     
                     while cookies_accepted == False:
@@ -208,14 +207,14 @@ try:
                     time.sleep(5)
                     cookie = driver.get_cookie("JSESSIONID") 
                     if cookie:
-                        cart_cookie = cookie['value']
+                        cart_cookie = cookie["value"]
                         print(cart_cookie)
-                        requests.post(url, json={'text': cart_cookie}, timeout=10)
+                        requests.post(url, json={"text": cart_cookie}, timeout=10)
                     else:
                         print("Cookie not found!")
                     if current_time - time_alternate >= 360:
                         time_alternate = time.time()
-                        requests.post(url, json={'text':"#"}, timeout=10)
+                        requests.post(url, json={"text":"#"}, timeout=10)
                         chrome.open_new_tab(gpu_url)
                     
                 else: 
@@ -225,10 +224,10 @@ try:
             elif "Mindfactory" in gpu_name:
                 if gpu_availabe_mindfactory in gpu_check:
                     print(f"[{get_current_time()}] {gpu_name}"+ Fore.GREEN + " in stock"+ Style.RESET_ALL + " at Mindfactory")
-                    requests.post(url, json={'text': gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
+                    requests.post(url, json={"text": gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
                     if current_time - time_mindfactory >= 360:
                         time_mindfactory = time.time()
-                        requests.post(url, json={'text':"#"}, timeout=10)
+                        requests.post(url, json={"text":"#"}, timeout=10)
                         chrome.open_new_tab(gpu_url)
                     
                 else: 
@@ -238,10 +237,10 @@ try:
             elif "Galaxus" in gpu_name:
                 if gpu_available_galaxus in gpu_check or gpu_available_galaxus_2 in gpu_check:
                     print(f"[{get_current_time()}] {gpu_name}"+ Fore.GREEN + " in stock"+ Style.RESET_ALL + " at Galaxus")
-                    requests.post(url, json={'text': gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
+                    requests.post(url, json={"text": gpu_name + " in stock" + "\n" + gpu_url}, timeout=10)
                     if current_time - time_galaxus >= 360:
                         time_galaxus = time.time()
-                        requests.post(url, json={'text':"#"}, timeout=10)
+                        requests.post(url, json={"text":"#"}, timeout=10)
                         chrome.open_new_tab(gpu_url)
                     
                 else: 
@@ -250,6 +249,6 @@ try:
         time.sleep(random.uniform(1, 3))           
         
 except KeyboardInterrupt:
-    print("Script interrupted. Closing browser...")
+    print("Script interrupted. Closing browser.")
     driver.quit()
     
