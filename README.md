@@ -1,4 +1,4 @@
-# Gpu_availabilty_checker
+# gpu_availabilty_checker
 
 This is a small script that checks the availability of certain products, specifically RTX 5090 GPUs, using browser automation with the Selenium library. 
 
